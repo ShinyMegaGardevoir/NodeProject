@@ -21,6 +21,23 @@ CTECArray<Type>::CTECArray(int size)
 		cerr << "Size must be greater than or equal to 1." << endl;
 		return;
 	}
+
+	for(int index = 0; index < size; index++)
+	{
+		if(head != nullptr)
+		{	//We have more than one ArrayNode
+			ArrayNode<Type> nextNode;
+			nextNode.setNext(head);
+			head = &nextNode;
+
+		}
+		else
+		{	//This is the first node in the array.
+			ArrayNode<Type> first;
+			head = &first;
+
+		}
+	}
 }
 
 template <class Type>
