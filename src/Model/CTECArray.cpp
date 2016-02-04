@@ -43,7 +43,19 @@ CTECArray<Type>::CTECArray(int size)
 template <class Type>
 CTECArray<Type>::~CTECArray()
 {
-	// TODO Auto-generated destructor stub
+	ArrayNode<Type> * deleteMe = head;
+	for(int index = 0; index < size; index++)
+	{
+		if(deleteMe->getNext() != nullptr)
+		{
+			head = deleteMe->getNext();
+			deleteMe->setNext(nullptr);
+		}
+			delete deleteMe->getNext();
+			deleteMe = head;
+
+	}
+	delete head;
 }
 
 template <class Type>
