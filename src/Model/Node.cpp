@@ -43,6 +43,6 @@ void Node<Type> :: setValue(Type value)
 template <class Type>
 Node<Type> * Node<Type> :: getPointers()
 {
-	return this->pointers;
+	return this->pointers; //Returns the pointers.
 }
 

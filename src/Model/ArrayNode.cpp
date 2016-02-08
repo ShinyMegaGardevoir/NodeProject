@@ -10,6 +10,7 @@
 template<class Type>
 ArrayNode<Type>::ArrayNode() : Node<Type>()
 {
+	//Next is null
 	this->next = nullptr;
 
 }
@@ -23,6 +24,7 @@ ArrayNode<Type>::~ArrayNode()
 template<class Type>
 ArrayNode<Type>::ArrayNode(Type value) : Node<Type>(value)
 {
+	//The value equals the value and next equals null
 	this->value = value;
 	this->next = nullptr;
 }
@@ -37,12 +39,14 @@ ArrayNode<Type>::ArrayNode(Type value, ArrayNode * next) : Node<Type>(value)
 template <class Type>
 ArrayNode<Type> * ArrayNode<Type> :: getNext()
 {
+	//Returns the next value
 	return this->next;
 }
 
 template <class Type>
 void ArrayNode<Type> :: setNext(ArrayNode<Type> * next)
 {
+	//Sets the next value
 	this->next = next;
 }
 

@@ -16,7 +16,7 @@ CTECArray<Type>::CTECArray(int size)
 	this->size = size;
 	head = nullptr;
 
-	if(size <=0)
+	if(size <=0) //Checks for the size to make sure it is greater than 0.
 	{
 		cerr << "Size must be greater than or equal to 1." << endl;
 		return;
@@ -41,7 +41,7 @@ CTECArray<Type>::CTECArray(int size)
 }
 
 template <class Type>
-CTECArray<Type>::~CTECArray()
+CTECArray<Type>::~CTECArray() //Deconstructs the ArrayNode.
 {
 	ArrayNode<Type> * deleteMe = head;
 	for(int index = 0; index < size; index++)
@@ -59,7 +59,7 @@ CTECArray<Type>::~CTECArray()
 }
 
 template <class Type>
-int CTECArray<Type>:: getSize()
+int CTECArray<Type>:: getSize() //Returns the size as an int.
 {
 	return this->size;
 }
@@ -85,7 +85,8 @@ Type* CTECArray<Type>::get(int position)
 			}
 			else
 			{
-				return current->getValue();
+				Type temp = current->getValue(); //Grab the value stored in the Node and shove it in temp.
+				return &temp;					//Return a pointer to the value.
 			}
 
 		}
