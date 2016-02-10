@@ -15,7 +15,7 @@ Node<Type>::Node() {
 }
 
 template <class Type>
-Node<Type>::Node(Type value)
+Node<Type>::Node(const Type& value)
 {
 	this->value = value;
 	pointers = nullptr;
@@ -35,7 +35,7 @@ Type Node<Type> :: getValue()
 }
 
 template <class Type>
-void Node<Type> :: setValue(Type value)
+void Node<Type> :: setValue(const Type& value)
 {
 	this->value = value;
 }

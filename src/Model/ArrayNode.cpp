@@ -22,7 +22,7 @@ ArrayNode<Type>::~ArrayNode()
 }
 
 template<class Type>
-ArrayNode<Type>::ArrayNode(Type value) : Node<Type>(value)
+ArrayNode<Type>::ArrayNode(const Type& value) : Node<Type>(value)
 {
 	//The value equals the value and next equals null
 	this->value = value;
@@ -30,7 +30,7 @@ ArrayNode<Type>::ArrayNode(Type value) : Node<Type>(value)
 }
 
 template<class Type>
-ArrayNode<Type>::ArrayNode(Type value, ArrayNode * next) : Node<Type>(value)
+ArrayNode<Type>::ArrayNode(const Type& value, ArrayNode<Type> * next) : Node<Type>(value)
 {
 	this->value = value;
 	this->next = next;
