@@ -10,15 +10,14 @@
 
 #include <iostream>
 #include <string>
-#include "../Model/Node.h"
+
 #include "../Model/Node.cpp"
 
-#include "../Model/ArrayNode.h"
 #include "../Model/ArrayNode.cpp"
 
-#include "../Model/CTECArray.h"
 #include "../Model/CTECArray.cpp"
 
+#include "../Model/Timer.h"
 using namespace std;
 
 
@@ -30,9 +29,9 @@ public:
 	void start();
 
 private:
-//	Node<int> intNode;
-//	ArrayNode<string> stringArrayNode;
-	CTECArray<string> * myStringArray;
+
+	CTECArray<int> * notHipsterInts;
+	Timer arrayTimer;
 };
 
 #endif /* SRC_CONTROLLER_NODECONTROLLER_H_ */
