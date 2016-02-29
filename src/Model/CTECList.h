@@ -38,6 +38,7 @@ private:
 	int index;
 	ArrayNode<Type> * head;
 	ArrayNode<Type> * end;
+	void calculateSize();
 };
 
 #endif /* MODEL_CTECLIST_H_ */
