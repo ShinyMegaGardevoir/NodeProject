@@ -23,31 +23,61 @@ CTECList<Type>::~CTECList()
 }
 
 template <class Type>
-int CTECList<Type>::getSize()
+int CTECList<Type>::getSize() //
 {
 	return this->size;
 }
 
 template <class Type>
-Type CTECList<Type>::getFront()
+Type CTECList<Type>::getFront() //
 {
+	assert(size >= 0);
+	return this->head;
 
 }
 
 template <class Type>
-Type CTECList<Type>::getEnd()
+Type CTECList<Type>::getEnd() //
 {
+	assert(size >= 0);
+	ArrayNode<Type> * current = head;
+	for(int i = 0; i < size; i++)
+	{
+		current = current->getNext();
+		if(i == size-1)
+		{
+			return current->getValue();
+		}
+	}
 
 }
 
 template <class Type>
-Type CTECList<Type>::getFromIndex(int index)
+Type CTECList<Type>::getFromIndex(int index) //
 {
+	//Bounds check for size and negative.
+
+	assert(index < size && index >= 0);
+
+	ArrayNode<Type> * current = head;
+	//Inclusive because I am inside the bounds.
+	for (int i = 0; i <= index; i++)
+	{
+		if (i != index)
+		{
+			current = current->getNext();
+		}
+		else
+		{
+			return current->getValue();
+		}
+
+	}
 
 }
 
 template <class Type>
-Type CTECList<Type>::removeFromFront()
+Type CTECList<Type>::removeFromFront() //
 {
 	assert(this->size > 0);
 
@@ -67,7 +97,7 @@ Type CTECList<Type>::removeFromFront()
 }
 
 template <class Type>
-void CTECList<Type>::calculateSize()
+void CTECList<Type>::calculateSize() //
 {
 	assert(size >= 0);
 
@@ -81,7 +111,7 @@ void CTECList<Type>::calculateSize()
 	}
 	else
 	{
-		count++
+		count++;
 		while(counterPointer->getNext() != nullptr)
 		{
 			counterPointer = counterPointer->getNext();
@@ -110,7 +140,7 @@ Type CTECList<Type>::removeFromEnd()
 }
 
 template <class Type>
-Type CTECList<Type>::removeFromIndex(int index)
+Type CTECList<Type>::removeFromIndex(int index) //
 {
 	assert(this->size > 0);
 	assert(index >= 0 && index < size);
@@ -127,9 +157,23 @@ Type CTECList<Type>::removeFromIndex(int index)
 			}
 			else
 			{
+				ArrayNode<Type> * newHead = new ArrayNode<Type>();
+				newHead = head;
 				for(int spot = 0; spot < index+1; spot++)
 				{
 
+					if(spot == index)
+					{
+						//Delete what head is pointing to
+						delete this->head;
+						//Set head to new head
+						this->head = newHead;
+
+					}
+					else
+					{
+						head = spot;
+					}
 				}
 				this->calculateSize();
 			}
@@ -138,7 +182,7 @@ Type CTECList<Type>::removeFromIndex(int index)
 }
 
 template <class Type>
-Type CTECList<Type>::set(int index, const Type& value)
+Type CTECList<Type>::set(int index, const Type& value) //
 {
 	assert(index < size && index >= 0);
 
