@@ -127,14 +127,37 @@ void CTECList<Type>::calculateSize() //
 
 
 template <class Type>
-Type CTECList<Type>::removeFromEnd()
+Type CTECList<Type>::removeFromEnd() //
 {
+	assert(size > 0);
 	Type valueToRemove;
-	//Loop over Size
-	for(int index = 0; index < size; index ++)
+	if(size == 1)
 	{
-
+		valueToRemove = removeFromFront();
+		end = nullptr;
 	}
+	else
+	{
+	ArrayNode<Type> * current = head;
+	//Loop over Size
+	for(int index = 0; index < size-1; index ++)
+	{
+		current = current->getNext();
+	}
+
+/**	Does the same thing as looping over size, just another way of doing it.
+	ArrayNode<Type> * pointer = head;
+	while(pointer->getNext()->getNext() != nullptr)
+	{
+		pointer = pointer->getNext();
+	}
+**/
+
+	valueToRemove = current->getNext()->getValue();
+	end = current;
+	delete current->getNext();
+	}
+
 	this->calculateSize();
 	return valueToRemove();
 }
@@ -204,20 +227,54 @@ Type CTECList<Type>::set(int index, const Type& value) //
 }
 
 template <class Type>
-void CTECList<Type>::addToFront(const Type& value)
+void CTECList<Type>::addToFront(const Type& value) //
 {
+
+	ArrayNode<Type> * newNode; //pointer to the new node
+	newNode = new ArrayNode<Type>; //creates the new node
+	newNode->setValue(value); //sets the new node value to the value
+	newNode->link = head; //links the new node to the first one
+	head = newNode; //moves the head to the new node
+
+	this->calculateSize();
 
 }
 
 template <class Type>
 void CTECList<Type>::addToEnd(const Type& value)
 {
+	ArrayNode<Type> * newNode; //creates a pointer to the new node
+	newNode = new ArrayNode<Type>; //creates the new node
+	newNode->setValue(value); //sets the value of the new node to the value
+	newNode->link = nullptr; //the new node links to null
 
+	if(head == nullptr) //runs if the head is null (meaning the size is 0)
+	{
+		head = newNode;
+		end = newNode;
+
+	}
+	else
+	{
+		end->link = newNode; //links the last node to the new node
+		end = newNode; //makes new node the new end
+	}
+
+	this->calculateSize();
 }
 
 template <class Type>
 void CTECList<Type>::addAtIndex(int index, const Type& value)
 {
+	assert(index < size && index >= 0);
+	ArrayNode<Type> * newNode;
+	newNode = new ArrayNode<Type>;
+	newNode->setValue(value);
+
+	for(int i = 0; i <= index; i++)
+	{
+
+	}
 
 }
 
