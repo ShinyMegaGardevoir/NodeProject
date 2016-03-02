@@ -268,13 +268,11 @@ void CTECList<Type>::addAtIndex(int index, const Type& value)
 {
 	assert(index < size && index >= 0);
 	ArrayNode<Type> * newNode;
+	ArrayNode<Type> * previous;
+	ArrayNode<Type> * nextNode
 	newNode = new ArrayNode<Type>;
 	newNode->setValue(value);
 
-	for(int i = 0; i <= index; i++)
-	{
-
-	}
 
 }
 
