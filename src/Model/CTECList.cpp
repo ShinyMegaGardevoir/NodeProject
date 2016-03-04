@@ -13,6 +13,7 @@ CTECList<Type>::CTECList()
 	this->size = 0;
 	this->head = nullptr;
 	this->end = nullptr;
+	this->value = nullptr;
 
 }
 
@@ -269,9 +270,58 @@ void CTECList<Type>::addAtIndex(int index, const Type& value)
 	assert(index < size && index >= 0);
 	ArrayNode<Type> * newNode;
 	ArrayNode<Type> * previous;
-	ArrayNode<Type> * nextNode
+	ArrayNode<Type> * current;
 	newNode = new ArrayNode<Type>;
+
+
+
 	newNode->setValue(value);
+	newNode->link = nullptr;
+
+	if(head == nullptr)
+	{
+		head = newNode;
+		end = newNode;
+		newNode->link = nullptr;
+	}
+	else
+	{
+		current = head;
+
+
+		while(current != nullptr)
+		{
+			if(current == index)
+			{
+				previous->link = newNode;
+				newNode->link = current;
+			}
+			else
+			{
+				previous = current;
+				current = current->link;
+			}
+		}
+
+		if (current == head)
+		{
+			newNode->link = head;
+			head = newNode;
+		}
+		else
+		{
+			previous->link = newNode;
+			newNode->link = current;
+
+			if(current == nullptr)
+			{
+				end = newNode;
+			}
+		}
+	}
+
+	this->calculateSize();
+
 
 
 }
