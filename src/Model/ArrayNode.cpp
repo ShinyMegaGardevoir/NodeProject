@@ -25,15 +25,15 @@ template<class Type>
 ArrayNode<Type>::ArrayNode(const Type& value) : Node<Type>(value)
 {
 	//The value equals the value and next equals null
-	this->value = value;
+	this->setValue(value);
 	this->next = nullptr;
 }
 
 template<class Type>
 ArrayNode<Type>::ArrayNode(const Type& value, ArrayNode<Type> * next) : Node<Type>(value)
 {
-	this->value = value;
-	this->next = next;
+	this->setValue(value);
+	this->setNext(next);
 }
 
 template <class Type>

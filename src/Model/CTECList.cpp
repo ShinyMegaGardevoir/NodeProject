@@ -6,6 +6,7 @@
  */
 
 #include "CTECList.h"
+#include <assert.h>
 
 template <class Type>
 CTECList<Type>::CTECList()
@@ -13,14 +14,34 @@ CTECList<Type>::CTECList()
 	this->size = 0;
 	this->head = nullptr;
 	this->end = nullptr;
-	this->value = nullptr;
 
 }
 
+/**
+ * 1: Start at head
+ * 2:
+ * 3:
+ * 4:
+ * 5:
+ **/
 template <class Type>
 CTECList<Type>::~CTECList()
 {
-	// TODO Auto-generated destructor stub
+	ArrayNode<Type> * current = head;
+
+	for(int deleteCount = 0; deleteCount < size; deleteCount++)
+	{
+		ArrayNode<Type> * temp = current;
+
+		current = current->getNext();
+		head = current;
+		delete temp;
+	}
+
+	delete head;
+	head = nullptr;
+	end = nullptr;
+	size = 0;
 }
 
 template <class Type>
@@ -33,7 +54,8 @@ template <class Type>
 Type CTECList<Type>::getFront() //
 {
 	assert(size >= 0);
-	return this->head;
+
+	return head->getValue();
 
 }
 
@@ -234,8 +256,17 @@ void CTECList<Type>::addToFront(const Type& value) //
 	ArrayNode<Type> * newNode; //pointer to the new node
 	newNode = new ArrayNode<Type>; //creates the new node
 	newNode->setValue(value); //sets the new node value to the value
-	newNode->link = head; //links the new node to the first one
-	head = newNode; //moves the head to the new node
+	if(head == nullptr)
+	{
+		head = newNode;
+		newNode->setNext(nullptr);
+		end = newNode;
+	}
+	else
+	{
+		newNode->setNext(head); //links the new node to the first one
+		head = newNode; //moves the head to the new node
+	}
 
 	this->calculateSize();
 
@@ -245,19 +276,20 @@ template <class Type>
 void CTECList<Type>::addToEnd(const Type& value)
 {
 	ArrayNode<Type> * newNode; //creates a pointer to the new node
-	newNode = new ArrayNode<Type>; //creates the new node
-	newNode->setValue(value); //sets the value of the new node to the value
-	newNode->link = nullptr; //the new node links to null
+	newNode = new ArrayNode<Type>(value); //creates the new node
+
+
 
 	if(head == nullptr) //runs if the head is null (meaning the size is 0)
 	{
 		head = newNode;
 		end = newNode;
+		newNode->setNext(nullptr);
 
 	}
 	else
 	{
-		end->link = newNode; //links the last node to the new node
+		end->setNext(newNode); //links the last node to the new node
 		end = newNode; //makes new node the new end
 	}
 
@@ -267,51 +299,54 @@ void CTECList<Type>::addToEnd(const Type& value)
 template <class Type>
 void CTECList<Type>::addAtIndex(int index, const Type& value)
 {
-	assert(index < size && index >= 0);
-	ArrayNode<Type> * newNode;
-	ArrayNode<Type> * previous;
-	ArrayNode<Type> * current;
-	newNode = new ArrayNode<Type>;
+	assert(index >= 0); //make sure the index is less than the size and the index is greater than or equal to 0.
+	ArrayNode<Type> * newNode; //Creates Pointer newNode
+	ArrayNode<Type> * previous; //Creates Pointer previous
+	ArrayNode<Type> * current; //Creates Pointer
+	newNode = new ArrayNode<Type>; //Makes newNode a new ArrayNode (of Type).
 
 
 
-	newNode->setValue(value);
-	newNode->link = nullptr;
+	newNode->setValue(value); //Sets the newNode value to value.
+	newNode->setNext(nullptr); //Sets the newNode link to null.
 
-	if(head == nullptr)
+	if(head == nullptr) //If there is nothing in the List, makes it the item in the list.
 	{
 		head = newNode;
 		end = newNode;
-		newNode->link = nullptr;
+		newNode->setNext(nullptr);
 	}
 	else
 	{
-		current = head;
+		current = head; //Current is equal to head
 
 
-		while(current != nullptr)
+
+
+
+		for(int spot = 0; spot < index; spot++)
 		{
-			if(current == index)
+			if(spot == index) //If current is equal to the index
 			{
-				previous->link = newNode;
-				newNode->link = current;
+				previous->setNext(newNode); //Previous links to the new Node
+				newNode->setNext(current); //New Node links to current
 			}
-			else
+			else //If current is not equal to the index
 			{
-				previous = current;
-				current = current->link;
+				previous = current; //previous equals current
+				current = current->getNext(); //current equals the next item
 			}
 		}
 
-		if (current == head)
+		if (current == head) //If next is null and current equals the head
 		{
-			newNode->link = head;
-			head = newNode;
+			newNode->setNext(head); //New node links to whatever the head is
+			head = newNode; //The head is now the new Node
 		}
-		else
+		else //If next is null and current is not the head
 		{
-			previous->link = newNode;
-			newNode->link = current;
+			previous->setNext(newNode);
+			newNode->setNext(current);
 
 			if(current == nullptr)
 			{

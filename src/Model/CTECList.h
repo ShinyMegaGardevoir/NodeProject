@@ -34,8 +34,6 @@ public:
 
 private:
 	int size;
-	const Type& value;
-	int index;
 	ArrayNode<Type> * head;
 	ArrayNode<Type> * end;
 	void calculateSize();

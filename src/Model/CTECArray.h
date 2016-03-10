@@ -22,6 +22,7 @@ public:
 private:
 	int size;
 	ArrayNode<Type> * head;
+
 };
 
 #endif /* MODEL_CTECARRAY_H_ */

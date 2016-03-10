@@ -18,6 +18,9 @@
 #include "../Model/CTECArray.cpp"
 
 #include "../Model/Timer.h"
+
+#include "../Model/CTECList.cpp"
+
 using namespace std;
 
 
@@ -31,7 +34,9 @@ public:
 private:
 
 	CTECArray<int> * notHipsterInts;
+	CTECList<int> * numbers;
 	Timer arrayTimer;
+	void testLists();
 };
 
 #endif /* SRC_CONTROLLER_NODECONTROLLER_H_ */
